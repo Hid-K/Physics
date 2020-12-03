@@ -1,0 +1,3 @@
+/Users/laptevaleksander/Documents/Projects/Physics/build/CMakeFiles/rebuild_cache.dir
+/Users/laptevaleksander/Documents/Projects/Physics/build/CMakeFiles/edit_cache.dir
+/Users/laptevaleksander/Documents/Projects/Physics/build/CMakeFiles/PhysicsSimu.dir

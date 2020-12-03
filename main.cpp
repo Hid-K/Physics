@@ -62,7 +62,7 @@ int main()
     {
         // srand(time(nullptr));
         circle = {10, 10, {(double)(rand()%windowWidth/2),(double)(rand()%windowHeight/2)},
-        {0,0}, {(char)(rand()%255),(char)(rand()%255),(char)(rand()%255)}};
+        {(double)(rand()%10),(double)(rand()%10)}, {(char)(rand()%255),(char)(rand()%255),(char)(rand()%255)}};
         simulation.addObject(circle);
     };
     
@@ -109,7 +109,7 @@ int main()
             break;
         }
         simulation.simulateTimePeriod(0.01);
-        SDL_Delay(1000/60);
+        // SDL_Delay(1000/60);
     };
     SDL_Quit();
     return 0;
