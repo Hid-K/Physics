@@ -1,6 +1,6 @@
 #include "PhysicsSimu.hpp"
 #include <iostream>
-PhysicsSimu::PhysicsSimu(double environmentViscosity, double simulationTimeStep)
+PhysicsSimu::PhysicsSimu(Vec2 environmentViscosity, double simulationTimeStep)
 :
 environmentViscosity(environmentViscosity),
 simulationTimeStep(simulationTimeStep)
@@ -40,9 +40,8 @@ PhysicsSimu::simulateTimePeriod(double time)
         {
             PhysicalCircle & currObj = *this->getObject(i);
             currObj.pos += currObj.speed*this->simulationTimeStep;
-            currObj.speed -= (this->environmentViscosity*this->simulationTimeStep);
-            if(currObj.speed.x < 0) currObj.speed.x = 0;
-            if(currObj.speed.y < 0) currObj.speed.y = 0;
+            Vec2 speedSign = {abs(currObj.speed.x)/currObj.speed.x,abs(currObj.speed.y)/currObj.speed.y};
+            currObj.speed -= (this->environmentViscosity * speedSign) * this->simulationTimeStep;
         };
     };
     return;

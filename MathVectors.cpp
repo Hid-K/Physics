@@ -33,6 +33,12 @@ Vec2::operator -=(double a)
     return {this->x -= a, this->y -= a};
 };
 
+Vec2 
+Vec2::operator -=(Vec2 a)
+{
+    return {this->x -= a.x, this->y -= a.y};
+};
+
 Vec2
 Vec2::operator *(Vec2 a)
 {
@@ -66,7 +72,7 @@ Vec2::operator =(Vec2 a)
 };
 
 Vec2
-Vec2::operator -(Vec2 a)
+Vec2::operator -(const Vec2 a)
 {
     Vec2 res;
     res.x = this->x - a.x;

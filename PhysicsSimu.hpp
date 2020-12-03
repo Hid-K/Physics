@@ -22,10 +22,10 @@ class PhysicsSimu
 {
 private:
     std::vector<PhysicalCircle> * objestsList;
-    double environmentViscosity;
+    Vec2 environmentViscosity;
     double simulationTimeStep;
 public:
-    PhysicsSimu(double environmentViscosity, double simulationTimeStep);
+    PhysicsSimu(Vec2 environmentViscosity, double simulationTimeStep);
     ~PhysicsSimu();
 
     void simulateTimePeriod(double time);

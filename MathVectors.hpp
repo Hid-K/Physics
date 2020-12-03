@@ -11,6 +11,7 @@ class Vec2
     Vec2 operator /=(Vec2 a);
     Vec2 operator +=(Vec2 a);
     Vec2 operator -=(double a);
+    Vec2 operator -=(Vec2 a);
     Vec2 operator *(Vec2 a);
     Vec2 operator *(double a);
     Vec2 operator /(Vec2 a);

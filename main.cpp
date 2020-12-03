@@ -19,12 +19,34 @@ void DrawCircle(SDL_Renderer * renderer, signed long long int radius, Vec2 pos, 
             if((pow(pos.y-y,2)+pow(pos.x-x,2)) <= 
                 pow(radius,2))
             {
-                SDL_RenderDrawPoint(renderer, (windowCenterPosX)+x,
-                                              (windowCenterPosY)+y);
+                SDL_RenderDrawPoint(renderer, (windowCenterPosX + windowWidth/2)+x,
+                                              (windowCenterPosY + windowHeight/2)+y);
             }
         }
     }
-}
+};
+
+void drawPhysicsSimulation(SDL_Renderer * renderer, PhysicsSimu * simulation)
+{
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderClear(renderer);
+    for(size_t i = 0; i < simulation->objectsCount(); ++i)
+    {
+        PhysicalCircle & currObject = *simulation->getObject(i);
+        // if((currObject.pos.x) < (windowCenterPosX + windowWidth /2) &&
+        //    (currObject.pos.x) > (windowCenterPosX - windowWidth /2) &&
+        //    (currObject.pos.y) < (windowCenterPosY + windowHeight/2) &&
+        //    (currObject.pos.y) > (windowCenterPosY - windowHeight/2))
+        // {
+            DrawCircle(renderer, currObject.radius, currObject.pos, currObject.color);
+            SDL_RenderDrawLine(renderer, (windowCenterPosX + windowWidth/2)+currObject.pos.x,
+                                         (windowCenterPosY + windowHeight/2)+currObject.pos.y,
+                                         (windowCenterPosX + windowWidth/2)+currObject.pos.x + currObject.speed.x,
+                                         (windowCenterPosY + windowHeight/2)+currObject.pos.y + currObject.speed.y);
+        // };
+    };
+    SDL_RenderPresent(renderer);
+};
 
 
 int main()
@@ -56,12 +78,12 @@ int main()
     };
 
 
-    PhysicsSimu simulation(0.0001, 0.0001);
+    PhysicsSimu simulation({9.8, 9.8}, 0.0001);
     PhysicalCircle circle;
-    for(size_t i = rand()%100; i > 0; --i)
+    for(size_t i = 50; i > 0; --i)
     {
         // srand(time(nullptr));
-        circle = {10, 10, {(double)(rand()%windowWidth/2),(double)(rand()%windowHeight/2)},
+        circle = {10, (double)(rand()%1000), {(double)(rand()%windowWidth/2),(double)(rand()%windowHeight/2)},
         {(double)(rand()%10),(double)(rand()%10)}, {(char)(rand()%255),(char)(rand()%255),(char)(rand()%255)}};
         simulation.addObject(circle);
     };
@@ -69,20 +91,7 @@ int main()
     char quit = 0;
     for(;quit == 0;)
     {
-        SDL_SetRenderDrawColor(mainWindowRenderer, 0, 0, 0, 255);
-        SDL_RenderClear(mainWindowRenderer);
-        for(size_t i = 0; i < simulation.objectsCount(); ++i)
-        {
-            PhysicalCircle & currObject = *simulation.getObject(i);
-            // if((currObject.pos.x) < (windowCenterPosX + windowWidth /2) &&
-            //    (currObject.pos.x) > (windowCenterPosX - windowWidth /2) &&
-            //    (currObject.pos.y) < (windowCenterPosY + windowHeight/2) &&
-            //    (currObject.pos.y) > (windowCenterPosY - windowHeight/2))
-            // {
-                DrawCircle(mainWindowRenderer, currObject.radius, currObject.pos, currObject.color);
-            // };
-        };
-        SDL_RenderPresent(mainWindowRenderer);
+        drawPhysicsSimulation(mainWindowRenderer, &simulation);
         SDL_Event e;
         for(;SDL_PollEvent(&e);)
         switch (e.type)
@@ -93,18 +102,44 @@ int main()
                 break;
             case SDL_MOUSEBUTTONDOWN:
                 PhysicalCircle * obj;
-                if(e.button.button == SDL_BUTTON_LEFT)
+                switch(e.button.button)
                 {
-                    obj = simulation.getObject({(double)e.button.x,(double)e.button.y});
-                };
-                if(obj != nullptr)
-                {
-                    for(;SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT);)
-                    {
-                        SDL_PollEvent(&e);
-                        SDL_Delay(10);
-                    };
-                    obj->pos = {(double)e.button.x,(double)e.button.y};
+                    case SDL_BUTTON_LEFT:
+                        PhysicalCircle * obj;
+                        obj = simulation.getObject({(double)e.button.x-(windowCenterPosX+windowHeight/2),
+                                                    (double)e.button.y-(windowCenterPosY+windowWidth/2)});
+                        if(obj != nullptr)
+                        {
+                            for(;SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT);)
+                            {
+                                obj->pos = {(double)e.button.x-(windowCenterPosX+windowHeight/2),
+                                            (double)e.button.y-(windowCenterPosY+windowWidth/2)};
+                                drawPhysicsSimulation(mainWindowRenderer, &simulation);
+                                SDL_PollEvent(&e);
+                                SDL_Delay(10);
+                            };
+                        };
+                    break;
+
+                    case SDL_BUTTON_RIGHT:
+                        PhysicalCircle * object;
+                        object = simulation.getObject({(double)e.button.x-(windowCenterPosX+windowHeight/2),
+                                                       (double)e.button.y-(windowCenterPosY+windowWidth/2)});
+                        if(object != nullptr)
+                        {
+                            for(;SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_RIGHT);)
+                            {
+                                object->speed = {(object->pos.x-((double)e.button.x-(windowCenterPosX+windowHeight/2))),
+                                                 (object->pos.y-((double)e.button.y-(windowCenterPosY+windowWidth/2)))};
+
+                                drawPhysicsSimulation(mainWindowRenderer, &simulation);
+                                SDL_PollEvent(&e);
+                                SDL_Delay(10);
+                            };
+                            std::cout<<"X speed:"<<object->speed.x<<std::endl;
+                            std::cout<<"Y speed:"<<object->speed.y<<std::endl;
+                        };
+                    break;
                 };
             break;
         }
