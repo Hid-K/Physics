@@ -130,6 +130,22 @@
 			"value" : "/usr/local/Cellar/cmake/3.18.4/bin/ctest"
 		},
 		{
+			"name" : "CMAKE_CUDA_COMPILER",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "CUDA compiler"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "CMAKE_CUDA_COMPILER-NOTFOUND"
+		},
+		{
 			"name" : "CMAKE_CXX_COMPILER",
 			"properties" : 
 			[
@@ -1112,6 +1128,18 @@
 			],
 			"type" : "PATH",
 			"value" : "/usr/local/lib/cmake/SDL2"
+		},
+		{
+			"name" : "_CUDA_NVCC_EXECUTABLE",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "_CUDA_NVCC_EXECUTABLE-NOTFOUND"
 		}
 	],
 	"kind" : "cache",

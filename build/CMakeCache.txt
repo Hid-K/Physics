@@ -23,6 +23,9 @@ CMAKE_AR:FILEPATH=/Library/Developer/CommandLineTools/usr/bin/ar
 //No help, variable specified on the command line.
 CMAKE_BUILD_TYPE:STRING=Debug
 
+//CUDA compiler
+CMAKE_CUDA_COMPILER:FILEPATH=CMAKE_CUDA_COMPILER-NOTFOUND
+
 //CXX compiler
 CMAKE_CXX_COMPILER:FILEPATH=/Library/Developer/CommandLineTools/usr/bin/c++
 
@@ -215,6 +218,9 @@ PhysicsSimu_SOURCE_DIR:STATIC=/Users/laptevaleksander/Documents/Projects/Physics
 //The directory containing a CMake configuration file for SDL2.
 SDL2_DIR:PATH=/usr/local/lib/cmake/SDL2
 
+//Path to a program.
+_CUDA_NVCC_EXECUTABLE:FILEPATH=_CUDA_NVCC_EXECUTABLE-NOTFOUND
+
 
 ########################
 # INTERNAL cache entries
@@ -238,6 +244,8 @@ CMAKE_COMMAND:INTERNAL=/usr/local/Cellar/cmake/3.18.4/bin/cmake
 CMAKE_CPACK_COMMAND:INTERNAL=/usr/local/Cellar/cmake/3.18.4/bin/cpack
 //Path to ctest program executable.
 CMAKE_CTEST_COMMAND:INTERNAL=/usr/local/Cellar/cmake/3.18.4/bin/ctest
+//ADVANCED property for variable: CMAKE_CUDA_COMPILER
+CMAKE_CUDA_COMPILER-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_CXX_COMPILER
 CMAKE_CXX_COMPILER-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_CXX_FLAGS

@@ -8,11 +8,17 @@ set(DCMAKE_BUILD_TYPE, Product)
 
 include_directories(${SDL2_INCLUDE_DIRS})
 
-file(GLOB SOURCES
-  ./*.cpp
+add_library(MathVectors_LIBRARY STATIC
+  MathVectors.hpp
+  MathVectors.cpp
 )
 
-add_executable(${PROJECT_NAME} ${SOURCES})
+add_library(PhysicsSimu_LIBRARY STATIC
+  PhysicsSimu.hpp
+  PhysicsSimu.cpp
+)
+
+add_executable(${PROJECT_NAME} main.cpp)
 
 if(MACOS_INFO_PLIST_NEEDED) #Info.plist include option
   set_target_properties(${PROJECT_NAME} PROPERTIES
@@ -27,3 +33,5 @@ if(MACOS_INFO_PLIST_NEEDED) #Info.plist include option
 endif()
 
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} MathVectors_LIBRARY)
+target_link_libraries(${PROJECT_NAME} PhysicsSimu_LIBRARY)
