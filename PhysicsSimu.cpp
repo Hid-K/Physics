@@ -1,48 +1,88 @@
 #include "PhysicsSimu.hpp"
-
-PhysicsSimu::PhysicsSimu()
+#include <iostream>
+PhysicsSimu::PhysicsSimu(double environmentViscosity, double simulationTimeStep)
+:
+environmentViscosity(environmentViscosity),
+simulationTimeStep(simulationTimeStep)
 {
-    this->objectsList = new std::vector<PhysicsSimuObject>;
+    this->objestsList = new std::vector<PhysicalCircle>();
 };
+
 PhysicsSimu::~PhysicsSimu()
 {
-    delete this->objectsList;
+    delete this->objestsList;
 };
-/**
- * Calculating collisions and speeds of objects for 1 period
-*/
+
 void
-PhysicsSimu::step()
+PhysicsSimu::simulateTimePeriod(double time)
 {
-    PhysicsSimuObject * currientObject;
-    double destToObject;
-    for(size_t i = 0; i < this->objectsList->size(); ++i)
+    for(double t = 0; t < time; t += this->simulationTimeStep)
     {
-        currientObject = &(*(this->objectsList))[i];
-        for(size_t j = 0; j < this->objectsList->size() - 1; ++j)
+        for(size_t i = 0; i < this->objectsCount(); ++i)
         {
-            if(&(*(this->objectsList))[i] == currientObject) continue;
-            if( ( destToObject = currientObject->getDest((*(this->objectsList))[i]) ) <= 0)
+            PhysicalCircle & currObj = *this->getObject(i);
+            for(size_t j = 0; j < this->objectsCount(); ++j)
             {
-                std::cout<<"Dest to obj:"<<destToObject<<std::endl;
+                if(j != i)
+                {
+                    PhysicalCircle & obj = *this->getObject(j);
+                    double collisionDepth = currObj.pos.dest(obj.pos) -
+                                            (currObj.radius + obj.radius);
+                    if(collisionDepth < 0)
+                    {
+                        currObj.speed += ((obj.pos - currObj.pos).normalized() - (obj.pos - currObj.pos).normalized()*2) *
+                            (obj.weight/currObj.weight)*abs(collisionDepth);
+                    };
+                }
             };
         };
+        for(size_t i = 0; i < this->objectsCount(); ++i)
+        {
+            PhysicalCircle & currObj = *this->getObject(i);
+            currObj.pos += currObj.speed*this->simulationTimeStep;
+            currObj.speed -= (this->environmentViscosity*this->simulationTimeStep);
+            if(currObj.speed.x < 0) currObj.speed.x = 0;
+            if(currObj.speed.y < 0) currObj.speed.y = 0;
+        };
     };
-};
-
-/**
- * Calculating collisions and speeds of objects for t periods
- * 
- * @param t periods to calcilate count
-*/
-void
-PhysicsSimu::step(size_t t)
-{
-    for(;t > 0; t--)this->step();
+    return;
 };
 
 void
-PhysicsSimu::addObject(PhysicsSimuObject & o)
+PhysicsSimu::addObject(PhysicalCircle obj)
 {
-    this->objectsList->push_back(o);
+    (*this->objestsList).push_back(obj);
+    return;
+};
+
+void
+PhysicsSimu::removeObject(size_t objectNo)
+{
+    (*this->objestsList).erase((*this->objestsList).begin()+objectNo);
+    return;
+};
+
+PhysicalCircle *
+PhysicsSimu::getObject(size_t objectNo)
+{
+    return &(*this->objestsList)[objectNo];
+};
+
+PhysicalCircle *
+PhysicsSimu::getObject(Vec2 point)
+{
+    for(size_t i = 0; i < this->objectsCount(); ++i)
+    {
+        if(this->getObject(i)->pos.dest(point) - this->getObject(i)->radius < 0)
+        {
+            return this->getObject(i);
+        };
+    };
+    return nullptr;
+};
+
+size_t
+PhysicsSimu::objectsCount()
+{
+    return (*this->objestsList).size();
 };

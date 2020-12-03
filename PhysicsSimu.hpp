@@ -1,23 +1,47 @@
-#ifndef PHYSICS_SIM_HPP
-#define PHYSICS_SIM_HPP
-
+#ifndef PHYSICS_SIMU_HPP
+#define PHYSICS_SIMU_HPP
 #include "MathVectors.hpp"
-#include "PhysicsSimuObject.hpp"
 #include <vector>
-#include <iostream>
+#include <stddef.h>
+
+struct RGB
+{
+    char r,g,b;
+};
+
+struct PhysicalCircle
+{
+    double radius;
+    double weight;
+    Vec2 pos;
+    Vec2 speed;
+    RGB color;
+};
 
 class PhysicsSimu
 {
-    private:
-        std::vector<PhysicsSimuObject> * objectsList;
-    public:
-    PhysicsSimu();
+private:
+    std::vector<PhysicalCircle> * objestsList;
+    double environmentViscosity;
+    double simulationTimeStep;
+public:
+    PhysicsSimu(double environmentViscosity, double simulationTimeStep);
     ~PhysicsSimu();
 
-    void step();
-    void step(size_t t);
+    void simulateTimePeriod(double time);
+    void addObject(PhysicalCircle obj);
+    void removeObject(size_t objectNo);
+    /**
+     * @returns Object number objectNo
+    **/
+    PhysicalCircle * getObject(size_t objectNo);
 
-    void addObject(PhysicsSimuObject&);
+    /**
+     * @returns Object, colliding with point
+    **/
+    PhysicalCircle * getObject(Vec2 point);
+
+    size_t objectsCount();
 };
 
 #endif

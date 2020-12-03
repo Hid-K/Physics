@@ -10,14 +10,20 @@ class Vec2
     Vec2 operator *=(Vec2 a);
     Vec2 operator /=(Vec2 a);
     Vec2 operator +=(Vec2 a);
+    Vec2 operator -=(double a);
     Vec2 operator *(Vec2 a);
+    Vec2 operator *(double a);
     Vec2 operator /(Vec2 a);
     Vec2 operator =(Vec2 a);
     Vec2 operator -(Vec2 a);
     Vec2 operator +(Vec2 a);
     bool operator ==(double a);
+    bool operator ==(Vec2 a);
     double length();
+    double dest(Vec2 a);
     Vec2 normalized();
 };
+
+const Vec2 ZERO_MATH_2D_VECTOR = {0.0,0.0};
 
 #endif

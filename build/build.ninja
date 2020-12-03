@@ -104,20 +104,6 @@ build CMakeFiles/PhysicsSimu.dir/PhysicsSimu.cpp.o: CXX_COMPILER__PhysicsSimu_De
   OBJECT_DIR = CMakeFiles/PhysicsSimu.dir
   OBJECT_FILE_DIR = CMakeFiles/PhysicsSimu.dir
 
-build CMakeFiles/PhysicsSimu.dir/PhysicsSimuObject.cpp.o: CXX_COMPILER__PhysicsSimu_Debug ../PhysicsSimuObject.cpp || cmake_object_order_depends_target_PhysicsSimu
-  DEP_FILE = CMakeFiles/PhysicsSimu.dir/PhysicsSimuObject.cpp.o.d
-  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -std=gnu++17
-  INCLUDES = -I/usr/local/Cellar/sdl2/2.0.12_1/include/SDL2
-  OBJECT_DIR = CMakeFiles/PhysicsSimu.dir
-  OBJECT_FILE_DIR = CMakeFiles/PhysicsSimu.dir
-
-build CMakeFiles/PhysicsSimu.dir/PhysicsSimuObjectCircle.cpp.o: CXX_COMPILER__PhysicsSimu_Debug ../PhysicsSimuObjectCircle.cpp || cmake_object_order_depends_target_PhysicsSimu
-  DEP_FILE = CMakeFiles/PhysicsSimu.dir/PhysicsSimuObjectCircle.cpp.o.d
-  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -std=gnu++17
-  INCLUDES = -I/usr/local/Cellar/sdl2/2.0.12_1/include/SDL2
-  OBJECT_DIR = CMakeFiles/PhysicsSimu.dir
-  OBJECT_FILE_DIR = CMakeFiles/PhysicsSimu.dir
-
 build CMakeFiles/PhysicsSimu.dir/main.cpp.o: CXX_COMPILER__PhysicsSimu_Debug ../main.cpp || cmake_object_order_depends_target_PhysicsSimu
   DEP_FILE = CMakeFiles/PhysicsSimu.dir/main.cpp.o.d
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -std=gnu++17
@@ -133,7 +119,7 @@ build CMakeFiles/PhysicsSimu.dir/main.cpp.o: CXX_COMPILER__PhysicsSimu_Debug ../
 #############################################
 # Link the executable PhysicsSimu
 
-build PhysicsSimu: CXX_EXECUTABLE_LINKER__PhysicsSimu_Debug CMakeFiles/PhysicsSimu.dir/MathVectors.cpp.o CMakeFiles/PhysicsSimu.dir/PhysicsSimu.cpp.o CMakeFiles/PhysicsSimu.dir/PhysicsSimuObject.cpp.o CMakeFiles/PhysicsSimu.dir/PhysicsSimuObjectCircle.cpp.o CMakeFiles/PhysicsSimu.dir/main.cpp.o
+build PhysicsSimu: CXX_EXECUTABLE_LINKER__PhysicsSimu_Debug CMakeFiles/PhysicsSimu.dir/MathVectors.cpp.o CMakeFiles/PhysicsSimu.dir/PhysicsSimu.cpp.o CMakeFiles/PhysicsSimu.dir/main.cpp.o
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk
   LINK_LIBRARIES = -L/usr/local/Cellar/sdl2/2.0.12_1/lib  -lSDL2
   OBJECT_DIR = CMakeFiles/PhysicsSimu.dir

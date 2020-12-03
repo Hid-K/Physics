@@ -27,6 +27,12 @@ Vec2::operator +=(Vec2 a)
     return res;
 };
 
+Vec2 
+Vec2::operator -=(double a)
+{
+    return {this->x -= a, this->y -= a};
+};
+
 Vec2
 Vec2::operator *(Vec2 a)
 {
@@ -34,6 +40,12 @@ Vec2::operator *(Vec2 a)
     res.x = this->x * a.x;
     res.y = this->y * a.y;
     return res;
+};
+
+Vec2
+Vec2::operator *(double a)
+{
+    return {this->x *a, this->y * a};
 };
 
 Vec2
@@ -78,11 +90,25 @@ Vec2::operator ==(double a)
     else return false;
 };
 
+bool
+Vec2::operator ==(Vec2 a)
+{
+    if(this->x == a.x && this->y == a.y) return true;
+    else return false;
+};
+
 double
 Vec2::length()
 {
     return sqrt(pow(this->x, 2) + pow(this->y, 2));
 };
+
+double
+Vec2::dest(Vec2 a)
+{
+    return sqrt(pow(a.x - this->x, 2) + pow(a.y - this->y, 2));
+};
+
 Vec2
 Vec2::normalized()
 {
