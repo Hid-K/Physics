@@ -136,8 +136,6 @@ int main()
                                 SDL_PollEvent(&e);
                                 SDL_Delay(10);
                             };
-                            std::cout<<"X speed:"<<object->speed.x<<std::endl;
-                            std::cout<<"Y speed:"<<object->speed.y<<std::endl;
                         };
                     break;
                 };
