@@ -1,5 +1,0 @@
-# ninja log v5
-0	273	1607013997140884190	CMakeFiles/PhysicsSimu.dir/MathVectors.cpp.o	3cf4ec6b0175d3b2
-2078	2162	1607017391917194795	PhysicsSimu	f90595bc4b58f3dd
-5	1448	1607016260312231116	CMakeFiles/PhysicsSimu.dir/PhysicsSimu.cpp.o	c58d40d378b847a9
-5	2078	1607017391811493175	CMakeFiles/PhysicsSimu.dir/main.cpp.o	3f21c2e03be35f23
