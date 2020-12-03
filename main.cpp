@@ -61,7 +61,7 @@ int main()
     for(size_t i = rand()%100; i > 0; --i)
     {
         // srand(time(nullptr));
-        circle = {10, 10, {(double)(rand()%windowWidth),(double)(rand()%windowHeight)},
+        circle = {10, 10, {(double)(rand()%windowWidth/2),(double)(rand()%windowHeight/2)},
         {0,0}, {(char)(rand()%255),(char)(rand()%255),(char)(rand()%255)}};
         simulation.addObject(circle);
     };
@@ -74,10 +74,10 @@ int main()
         for(size_t i = 0; i < simulation.objectsCount(); ++i)
         {
             PhysicalCircle & currObject = *simulation.getObject(i);
-            // if((currObject.pos.x) <= (windowCenterPosX + windowWidth /2) &&
-            //    (currObject.pos.x) >= (windowCenterPosX - windowWidth /2) &&
-            //    (currObject.pos.y) <= (windowCenterPosY + windowHeight/2) &&
-            //    (currObject.pos.y) >= (windowCenterPosY - windowHeight/2))
+            // if((currObject.pos.x) < (windowCenterPosX + windowWidth /2) &&
+            //    (currObject.pos.x) > (windowCenterPosX - windowWidth /2) &&
+            //    (currObject.pos.y) < (windowCenterPosY + windowHeight/2) &&
+            //    (currObject.pos.y) > (windowCenterPosY - windowHeight/2))
             // {
                 DrawCircle(mainWindowRenderer, currObject.radius, currObject.pos, currObject.color);
             // };
