@@ -32,7 +32,11 @@ PhysicsSimu::simulateTimePeriod(double time)
                     {
                         Vec2 impulse = ( ((obj.pos - currObj.pos).normalized()) *
                             (obj.mass/currObj.mass) * collisionDepth );
-                        currObj.speed += impulse;
+                        
+                        double collisionAngle = acos((obj.pos.x - currObj.pos.x) / obj.pos.dest(currObj.pos));
+                        impulse.x = impulse.length() * cos(collisionAngle) * (-1);
+                        impulse.y = impulse.length() * sin(collisionAngle) * (-1);
+                        currObj.speed += impulse / this->environmentViscosity;
                     } else
                     {
                         /*Universal gravitation ( UNSTABLE!!!! )*/
