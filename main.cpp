@@ -80,11 +80,13 @@ int main()
 
     PhysicsSimu simulation({9.8, 9.8}, 0.0001);
     PhysicalCircle circle;
-    for(size_t i = 50; i > 0; --i)
+    // circle = {1, __PHYSICSSIMU_MASS_MAX__, {0,0}, {0,0}, {(char)255,(char)255,(char)255}}
+    // simulation.addObject(circle);
+    for(size_t i = 10; i > 0; --i)
     {
         // srand(time(nullptr));
         circle = {10, (double)(rand()%1000), {(double)(rand()%windowWidth/2),(double)(rand()%windowHeight/2)},
-        {(double)(rand()%10),(double)(rand()%10)}, {(char)(rand()%255),(char)(rand()%255),(char)(rand()%255)}};
+        {1,1}, {(char)(rand()%255),(char)(rand()%255),(char)(rand()%255)}};
         simulation.addObject(circle);
     };
     

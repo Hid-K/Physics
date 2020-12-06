@@ -9,12 +9,14 @@ class Vec2
         double x,y;
     Vec2 operator *=(Vec2 a);
     Vec2 operator /=(Vec2 a);
+    Vec2 operator /=(double a);
     Vec2 operator +=(Vec2 a);
     Vec2 operator -=(double a);
     Vec2 operator -=(Vec2 a);
     Vec2 operator *(Vec2 a);
     Vec2 operator *(double a);
     Vec2 operator /(Vec2 a);
+    Vec2 operator /(double a);
     Vec2 operator =(Vec2 a);
     Vec2 operator -(Vec2 a);
     Vec2 operator +(Vec2 a);

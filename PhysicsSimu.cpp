@@ -30,8 +30,15 @@ PhysicsSimu::simulateTimePeriod(double time)
                                             (currObj.radius + obj.radius);
                     if(collisionDepth < 0)
                     {
-                        currObj.speed += ((obj.pos - currObj.pos).normalized() - (obj.pos - currObj.pos).normalized()*2) *
-                            (obj.weight/currObj.weight)*abs(collisionDepth);
+                        Vec2 impulse = ( ((obj.pos - currObj.pos).normalized()) *
+                            (obj.mass/currObj.mass) * collisionDepth );
+                        currObj.speed += impulse;
+                    } else
+                    {
+                        /*Universal gravitation ( UNSTABLE!!!! )*/
+                        // currObj.speed += ( ( ((currObj.pos - obj.pos).normalized() - (currObj.pos - obj.pos).normalized()*2) /
+                        //              this->environmentViscosity ) *
+                        //              ((currObj.mass * obj.mass) / collisionDepth * collisionDepth) ) / 1000000000000;
                     };
                 }
             };
@@ -39,9 +46,15 @@ PhysicsSimu::simulateTimePeriod(double time)
         for(size_t i = 0; i < this->objectsCount(); ++i)
         {
             PhysicalCircle & currObj = *this->getObject(i);
-            currObj.pos += currObj.speed*this->simulationTimeStep;
-            Vec2 speedSign = {abs(currObj.speed.x)/currObj.speed.x,abs(currObj.speed.y)/currObj.speed.y};
-            currObj.speed -= (this->environmentViscosity * speedSign) * this->simulationTimeStep;
+            if(currObj.mass < __PHYSICSSIMU_MASS_MAX__)
+            {
+                currObj.pos += currObj.speed*this->simulationTimeStep;
+                Vec2 speedSign = {abs(currObj.speed.x)/currObj.speed.x,abs(currObj.speed.y)/currObj.speed.y};
+                currObj.speed -= (this->environmentViscosity * speedSign) * this->simulationTimeStep;
+            } else
+            {
+                currObj.speed = {0,0};
+            };
         };
     };
     return;

@@ -3,6 +3,9 @@
 #include "MathVectors.hpp"
 #include <vector>
 #include <stddef.h>
+#include <limits.h>
+
+#define __PHYSICSSIMU_MASS_MAX__ std::numeric_limits<double>::max()
 
 struct RGB
 {
@@ -12,7 +15,7 @@ struct RGB
 struct PhysicalCircle
 {
     double radius;
-    double weight;
+    double mass;
     Vec2 pos;
     Vec2 speed;
     RGB color;

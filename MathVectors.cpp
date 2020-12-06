@@ -19,6 +19,15 @@ Vec2::operator /=(Vec2 a)
 };
 
 Vec2
+Vec2::operator /(double a)
+{
+    Vec2 res;
+    res.x = this->x / a;
+    res.y = this->y / a;
+    return res;
+};
+
+Vec2
 Vec2::operator +=(Vec2 a)
 {
     Vec2 res;
