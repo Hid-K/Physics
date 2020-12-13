@@ -30,13 +30,16 @@ PhysicsSimu::simulateTimePeriod(double time)
                                             (currObj.radius + obj.radius);
                     if(collisionDepth < 0)
                     {
-                        Vec2 impulse = ( ((obj.pos - currObj.pos).normalized()) *
-                            (obj.mass/currObj.mass) * collisionDepth );
+                        Vec2 impulse = (obj.speed*obj.mass)/currObj.mass * (currObj.pos - obj.pos).normalized() * collisionDepth;
                         
-                        double collisionAngle = acos((obj.pos.x - currObj.pos.x) / obj.pos.dest(currObj.pos));
-                        impulse.x = impulse.length() * cos(collisionAngle) * (-1);
-                        impulse.y = impulse.length() * sin(collisionAngle) * (-1);
-                        currObj.speed += impulse / this->environmentViscosity;
+                        // double collisionAngle = acos((obj.pos.x - currObj.pos.x) / obj.pos.dest(currObj.pos));
+                        // double currObjSpeedAngle = acos(currObj.speed.x / currObj.speed.length());
+                        // double objSpeedAngle = acos(obj.speed.x / obj.speed.length());
+                        
+                        // impulse.x = impulse.length() * cos( ( objSpeedAngle - currObjSpeedAngle ) + collisionAngle ) * (-1);
+                        // impulse.y = impulse.length() * sin( ( objSpeedAngle - currObjSpeedAngle ) + collisionAngle ) * (-1);
+
+                        currObj.speed += impulse;
                     } else
                     {
                         /*Universal gravitation ( UNSTABLE!!!! )*/
