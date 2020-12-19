@@ -1,0 +1,23 @@
+"filename", "language", "JSON", "C++", "CMake", "CMake Cache", "Log", "C", "comment", "blank", "total"
+"/Users/laptevaleksander/Documents/Projects/Physics/MathVectors.cpp", "C++", 0, 169, 0, 0, 0, 0, 0, 19, 188
+"/Users/laptevaleksander/Documents/Projects/Physics/MathVectors.hpp", "C++", 0, 29, 0, 0, 0, 0, 0, 4, 33
+"/Users/laptevaleksander/Documents/Projects/Physics/PhysicsSimu.cpp", "C++", 0, 119, 0, 0, 0, 0, 10, 15, 144
+"/Users/laptevaleksander/Documents/Projects/Physics/PhysicsSimu.hpp", "C++", 0, 37, 0, 0, 0, 0, 6, 9, 52
+"/Users/laptevaleksander/Documents/Projects/Physics/build/.cmake/api/v1/query/client-vscode/query.json", "JSON", 1, 0, 0, 0, 0, 0, 0, 0, 1
+"/Users/laptevaleksander/Documents/Projects/Physics/build/.cmake/api/v1/reply/cache-v2-8e1403994af5bb011157.json", "JSON", 1123, 0, 0, 0, 0, 0, 0, 1, 1124
+"/Users/laptevaleksander/Documents/Projects/Physics/build/.cmake/api/v1/reply/codemodel-v2-a3b1af7e1e067954c5ff.json", "JSON", 77, 0, 0, 0, 0, 0, 0, 1, 78
+"/Users/laptevaleksander/Documents/Projects/Physics/build/.cmake/api/v1/reply/index-2020-12-19T10-15-32-0399.json", "JSON", 88, 0, 0, 0, 0, 0, 0, 1, 89
+"/Users/laptevaleksander/Documents/Projects/Physics/build/.cmake/api/v1/reply/target-MathVectors_LIBRARY-Debug-b7adf5864547eee6d22e.json", "JSON", 106, 0, 0, 0, 0, 0, 0, 1, 107
+"/Users/laptevaleksander/Documents/Projects/Physics/build/.cmake/api/v1/reply/target-PhysicsSimu-Debug-6f094d1da0890dc30b55.json", "JSON", 153, 0, 0, 0, 0, 0, 0, 1, 154
+"/Users/laptevaleksander/Documents/Projects/Physics/build/.cmake/api/v1/reply/target-PhysicsSimu_LIBRARY-Debug-e103f4d33d27c5d46dd8.json", "JSON", 106, 0, 0, 0, 0, 0, 0, 1, 107
+"/Users/laptevaleksander/Documents/Projects/Physics/build/CMakeCache.txt", "CMake Cache", 0, 0, 0, 287, 0, 0, 0, 66, 353
+"/Users/laptevaleksander/Documents/Projects/Physics/build/CMakeFiles/3.18.4/CMakeCCompiler.cmake", "CMake", 0, 0, 60, 0, 0, 0, 0, 18, 78
+"/Users/laptevaleksander/Documents/Projects/Physics/build/CMakeFiles/3.18.4/CMakeCXXCompiler.cmake", "CMake", 0, 0, 70, 0, 0, 0, 0, 20, 90
+"/Users/laptevaleksander/Documents/Projects/Physics/build/CMakeFiles/3.18.4/CMakeSystem.cmake", "CMake", 0, 0, 10, 0, 0, 0, 0, 6, 16
+"/Users/laptevaleksander/Documents/Projects/Physics/build/CMakeFiles/3.18.4/CompilerIdC/CMakeCCompilerId.c", "C", 0, 0, 0, 0, 0, 509, 50, 116, 675
+"/Users/laptevaleksander/Documents/Projects/Physics/build/CMakeFiles/3.18.4/CompilerIdCXX/CMakeCXXCompilerId.cpp", "C++", 0, 498, 0, 0, 0, 0, 52, 114, 664
+"/Users/laptevaleksander/Documents/Projects/Physics/build/CMakeFiles/CMakeOutput.log", "Log", 0, 0, 0, 0, 224, 0, 0, 27, 251
+"/Users/laptevaleksander/Documents/Projects/Physics/build/cmake_install.cmake", "CMake", 0, 0, 42, 0, 0, 0, 0, 8, 50
+"/Users/laptevaleksander/Documents/Projects/Physics/build/compile_commands.json", "JSON", 17, 0, 0, 0, 0, 0, 0, 0, 17
+"/Users/laptevaleksander/Documents/Projects/Physics/main.cpp", "C++", 0, 197, 0, 0, 0, 0, 13, 53, 263
+"Total", "-", 1671, 1049, 182, 287, 224, 509, 131, 481, 4534

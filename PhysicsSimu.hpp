@@ -21,6 +21,8 @@ struct PhysicalCircle
     RGB color;
 };
 
+void circlesCollisionSpeedCalc(PhysicalCircle & currObj, PhysicalCircle & obj);
+
 class PhysicsSimu
 {
 private:

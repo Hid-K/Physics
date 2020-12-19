@@ -7,13 +7,13 @@
 size_t windowCenterPosX = 0;
 size_t windowCenterPosY = 0;
 
-size_t windowWidth = 512;
+size_t windowWidth = 1024;
 size_t windowHeight = 512;
 
-// #define SIMULATION_RENDER_STATUS_EXECUTING 1
-// #define SIMULATION_RENDER_STATUS_PAUSED    0
+#define SIMULATION_RENDER_STATUS_EXECUTING 1
+#define SIMULATION_RENDER_STATUS_PAUSED    0
 
-// char simulationRenderStatus = SIMULATION_RENDER_STATUS_EXECUTING;
+char simulationRenderStatus = SIMULATION_RENDER_STATUS_PAUSED;
 
 void DrawCircle(SDL_Renderer * renderer, signed long long int radius, Vec2 pos, RGB color)
 {
@@ -58,16 +58,21 @@ void SDL_WINDOW_UPDATER(char * quit, PhysicsSimu * simulation, SDL_Renderer * ma
     for(;*quit == 0;)
     {
         drawPhysicsSimulation(mainWindowRenderer, simulation);
-        // if(simulationRenderStatus == SIMULATION_RENDER_STATUS_EXECUTING)
-        // {
+        if(simulationRenderStatus == SIMULATION_RENDER_STATUS_EXECUTING)
+        {
             simulation->simulateTimePeriod(0.01);
-        // };
+        };
         SDL_Delay(1000/60);
     };
 };
 
 int main()
 {
+
+    // for(double a = 0;a < M_PI*2; a += M_PI_4/2){
+    //     Vec2 adasda = {cos(a),sin(a)};
+    //     std::cout<<a*180/M_PI<<" : "<<adasda.angle() * 180 / M_PI<<std::endl<<std::endl;
+    // };
     if(SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
         std::cout<<"Cant create a main window"<<std::endl;
@@ -99,13 +104,85 @@ int main()
     PhysicalCircle circle;
     // circle = {1, __PHYSICSSIMU_MASS_MAX__, {0,0}, {0,0}, {(char)255,(char)255,(char)255}}
     // simulation.addObject(circle);
-    for(size_t i = 20; i > 0; --i)
-    {
-        // srand(time(nullptr));
-        circle = {10, 10, {(double)(rand()%windowWidth/2),(double)(rand()%windowHeight/2)},
-        {1,1}, {(char)(rand()%255),(char)(rand()%255),(char)(rand()%255)}};
-        simulation->addObject(circle);
-    };
+    
+    circle = {10, 10, {-250,0},
+    {200,0}, {(char)(255),(char)(255),(char)(255)}};
+    simulation->addObject(circle);
+
+
+
+
+    circle = {10, 10, {-17,0},
+    {0,0}, {(char)(rand()%255),(char)(rand()%255),(char)(rand()%255)}};
+    simulation->addObject(circle);
+
+
+
+    
+    circle = {10, 10, {1,10},
+    {0,0}, {(char)(rand()%255),(char)(rand()%255),(char)(rand()%255)}};
+    simulation->addObject(circle);
+
+    circle = {10, 10, {1,-10},
+    {0,0}, {(char)(rand()%255),(char)(rand()%255),(char)(rand()%255)}};
+    simulation->addObject(circle);
+
+
+
+
+    circle = {10, 10, {19,-20},
+    {0,0}, {(char)(rand()%255),(char)(rand()%255),(char)(rand()%255)}};
+    simulation->addObject(circle);
+
+    circle = {10, 10, {19,0},
+    {0,0}, {(char)(rand()%255),(char)(rand()%255),(char)(rand()%255)}};
+    simulation->addObject(circle);
+
+    circle = {10, 10, {19,20},
+    {0,0}, {(char)(rand()%255),(char)(rand()%255),(char)(rand()%255)}};
+    simulation->addObject(circle);
+
+
+
+
+    circle = {10, 10, {37,30},
+    {0,0}, {(char)(rand()%255),(char)(rand()%255),(char)(rand()%255)}};
+    simulation->addObject(circle);
+
+    circle = {10, 10, {37,10},
+    {0,0}, {(char)(rand()%255),(char)(rand()%255),(char)(rand()%255)}};
+    simulation->addObject(circle);
+
+    circle = {10, 10, {37,-10},
+    {0,0}, {(char)(rand()%255),(char)(rand()%255),(char)(rand()%255)}};
+    simulation->addObject(circle);
+
+    circle = {10, 10, {37,-30},
+    {0,0}, {(char)(rand()%255),(char)(rand()%255),(char)(rand()%255)}};
+    simulation->addObject(circle);
+
+
+
+
+    circle = {10, 10, {55,40},
+    {0,0}, {(char)(rand()%255),(char)(rand()%255),(char)(rand()%255)}};
+    simulation->addObject(circle);
+
+    circle = {10, 10, {55,20},
+    {0,0}, {(char)(rand()%255),(char)(rand()%255),(char)(rand()%255)}};
+    simulation->addObject(circle);
+
+    circle = {10, 10, {55,0},
+    {0,0}, {(char)(rand()%255),(char)(rand()%255),(char)(rand()%255)}};
+    simulation->addObject(circle);
+
+    circle = {10, 10, {55,-20},
+    {0,0}, {(char)(rand()%255),(char)(rand()%255),(char)(rand()%255)}};
+    simulation->addObject(circle);
+
+    circle = {10, 10, {55,-40},
+    {0,0}, {(char)(rand()%255),(char)(rand()%255),(char)(rand()%255)}};
+    simulation->addObject(circle);
     
     char quit = 0;
     
@@ -127,15 +204,15 @@ int main()
                 {
                     case SDL_BUTTON_LEFT:
                         PhysicalCircle * obj;
-                        obj = simulation->getObject({(double)e.button.x-(windowCenterPosX+windowHeight/2),
-                                                    (double)e.button.y-(windowCenterPosY+windowWidth/2)});
+                        obj = simulation->getObject({( (double)e.button.x - windowWidth/2)+(windowCenterPosX),
+                                                     ( (double)e.button.y - windowHeight/2)+(windowCenterPosY)});
                         if(obj != nullptr)
                         {
                             // simulationRenderStatus = SIMULATION_RENDER_STATUS_PAUSED;
                             for(;SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT);)
                             {
-                                obj->pos = {(double)e.button.x-(windowCenterPosX+windowHeight/2),
-                                            (double)e.button.y-(windowCenterPosY+windowWidth/2)};
+                                obj->pos = {( (double)e.button.x - windowWidth/2)+(windowCenterPosX),
+                                            ( (double)e.button.y - windowHeight/2)+(windowCenterPosY)};
                                 // drawPhysicsSimulation(mainWindowRenderer, simulation);
                                 SDL_PollEvent(&e);
                                 SDL_Delay(10);
@@ -146,15 +223,15 @@ int main()
 
                     case SDL_BUTTON_RIGHT:
                         PhysicalCircle * object;
-                        object = simulation->getObject({(double)e.button.x-(windowCenterPosX+windowHeight/2),
-                                                       (double)e.button.y-(windowCenterPosY+windowWidth/2)});
+                        object = simulation->getObject({( (double)e.button.x - windowWidth/2)+(windowCenterPosX),
+                                                        ( (double)e.button.y - windowHeight/2)+(windowCenterPosY)});
                         if(object != nullptr)
                         {
                             // simulationRenderStatus = SIMULATION_RENDER_STATUS_PAUSED;
                             for(;SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_RIGHT);)
                             {
-                                object->speed = {(object->pos.x-((double)e.button.x-(windowCenterPosX+windowHeight/2))),
-                                                 (object->pos.y-((double)e.button.y-(windowCenterPosY+windowWidth/2)))};
+                                object->speed = {( object->pos.x - ((double)e.button.x - windowWidth/2)+(windowCenterPosX)),
+                                                   object->pos.y - (((double)e.button.y - windowHeight/2)+(windowCenterPosY))};
 
                                 // drawPhysicsSimulation(mainWindowRenderer, simulation);
                                 SDL_PollEvent(&e);
@@ -164,6 +241,41 @@ int main()
                         };
                     break;
                 };
+            break;
+            case SDL_KEYDOWN:
+                // std::cout<<(char)e.key.keysym.scancode<<std::endl;
+                if(e.key.keysym.scancode == SDL_SCANCODE_P)
+                {
+                    if(simulationRenderStatus == SIMULATION_RENDER_STATUS_PAUSED)
+                    {
+                        simulationRenderStatus = SIMULATION_RENDER_STATUS_EXECUTING;
+                    } else
+                    {
+                        simulationRenderStatus = SIMULATION_RENDER_STATUS_PAUSED;
+                    };
+                    for(;e.key.keysym.scancode == 19;)SDL_PollEvent(&e);
+                };
+
+                if(e.key.keysym.scancode == SDL_SCANCODE_UP) //UP
+                {
+                    windowCenterPosY++;
+                };
+
+                if(e.key.keysym.scancode == SDL_SCANCODE_DOWN) //DOWN
+                {
+                    windowCenterPosY--;
+                };
+                if(e.key.keysym.scancode == SDL_SCANCODE_LEFT) //LEFT
+                {
+                    windowCenterPosX++;
+                };
+                if(e.key.keysym.scancode == SDL_SCANCODE_RIGHT) //RIGHT
+                {
+                    windowCenterPosX--;
+                };
+
+                default:
+                break;
             break;
         }
     };

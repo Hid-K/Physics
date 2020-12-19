@@ -19,6 +19,15 @@ Vec2::operator /=(Vec2 a)
 };
 
 Vec2
+Vec2::operator /=(double a)
+{
+    Vec2 res;
+    res.x = this->x /= a;
+    res.y = this->y /= a;
+    return res;
+};
+
+Vec2
 Vec2::operator /(double a)
 {
     Vec2 res;
@@ -122,6 +131,50 @@ double
 Vec2::dest(Vec2 a)
 {
     return sqrt(pow(a.x - this->x, 2) + pow(a.y - this->y, 2));
+};
+
+double
+Vec2::angle()
+{
+    double angle = abs(atan(this->y / this->x));
+    if(isnan(angle))
+    {
+        if(y == 0)
+        {
+            angle = 0;
+        } else if(y > 0)
+        {
+            angle = M_PI_4;
+        } else if(y < 0)
+        {
+            angle = M_PI + M_PI_4;
+        };
+    } else
+    {
+        if(angle == 0 && y == 0)
+        {
+            if(x > 0)
+            {
+                angle = 0;
+            } else if(x < 0)
+            {
+                angle = M_PI;
+            };
+        } else
+        {
+            if(x < 0 && y > 0)
+            {
+                angle = (M_PI - angle);
+            } else if(x < 0 && y < 0)
+            {
+                angle = M_PI + angle;
+            } else if(x > 0 && y < 0)
+            {
+                angle = M_PI + (M_PI - angle);
+            };
+        };
+    };
+    return angle;
 };
 
 Vec2

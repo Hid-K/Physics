@@ -30,16 +30,14 @@ PhysicsSimu::simulateTimePeriod(double time)
                                             (currObj.radius + obj.radius);
                     if(collisionDepth < 0)
                     {
-                        Vec2 impulse = (obj.speed*obj.mass)/currObj.mass * (currObj.pos - obj.pos).normalized() * collisionDepth;
-                        
-                        // double collisionAngle = acos((obj.pos.x - currObj.pos.x) / obj.pos.dest(currObj.pos));
-                        // double currObjSpeedAngle = acos(currObj.speed.x / currObj.speed.length());
-                        // double objSpeedAngle = acos(obj.speed.x / obj.speed.length());
-                        
-                        // impulse.x = impulse.length() * cos( ( objSpeedAngle - currObjSpeedAngle ) + collisionAngle ) * (-1);
-                        // impulse.y = impulse.length() * sin( ( objSpeedAngle - currObjSpeedAngle ) + collisionAngle ) * (-1);
-
-                        currObj.speed += impulse;
+                        circlesCollisionSpeedCalc(currObj, obj);
+                        circlesCollisionSpeedCalc(obj, currObj);
+                        currObj.speed += (obj.pos - currObj.pos) * collisionDepth;
+                        obj.speed += (currObj.pos - obj.pos) * collisionDepth;
+                        // std::cout<<currObj.speed.x<<'\n';
+                        // std::cout<<currObj.speed.y<<'\n';
+                        // std::cout<<obj.speed.x<<'\n';
+                        // std::cout<<obj.speed.y<<'\n'<<'\n';
                     } else
                     {
                         /*Universal gravitation ( UNSTABLE!!!! )*/
@@ -56,11 +54,20 @@ PhysicsSimu::simulateTimePeriod(double time)
             if(currObj.mass < __PHYSICSSIMU_MASS_MAX__)
             {
                 currObj.pos += currObj.speed*this->simulationTimeStep;
-                Vec2 speedSign = {abs(currObj.speed.x)/currObj.speed.x,abs(currObj.speed.y)/currObj.speed.y};
+                Vec2 speedSign = {0,0};
+                if(currObj.speed.x != 0)
+                {
+                    speedSign.x = abs(currObj.speed.x)/currObj.speed.x;
+                };
+                if(currObj.speed.y != 0)
+                {
+                    speedSign.y = abs(currObj.speed.y)/currObj.speed.y;
+                };
+
                 currObj.speed -= (this->environmentViscosity * speedSign) * this->simulationTimeStep;
             } else
             {
-                currObj.speed = {0,0};
+                // currObj.speed = {0,0};
             };
         };
     };
@@ -104,4 +111,34 @@ size_t
 PhysicsSimu::objectsCount()
 {
     return (*this->objestsList).size();
+};
+
+void circlesCollisionSpeedCalc(PhysicalCircle & obj, PhysicalCircle & currObj)
+{
+    Vec2 collisionNorm = (obj.pos - currObj.pos);
+
+    double touchAngle        =  collisionNorm.angle();
+    double currObjSpeedAngle =  currObj.speed.angle();
+    double objSpeedAngle     =  obj.speed.angle();
+
+    const double currObjSpeedLen = currObj.speed.length();
+
+    const double speedModule = ( currObjSpeedLen * cos(currObjSpeedAngle - touchAngle) * (currObj.mass - obj.mass) + 
+                                 2 * obj.mass * obj.speed.length() * cos(objSpeedAngle - touchAngle) )
+                                 /
+                                 (currObj.mass + obj.mass);
+
+    currObj.speed.x = speedModule
+                    *
+                    cos(touchAngle) +
+                    currObjSpeedLen * sin(currObjSpeedAngle - touchAngle) * cos(touchAngle + M_PI_2)
+                    ;
+
+    currObj.speed.y = speedModule
+                    *
+                    sin(touchAngle) +
+                    currObjSpeedLen * sin(currObjSpeedAngle - touchAngle) * sin(touchAngle + M_PI_2)
+                    ;
+
+    // currObj.speed /= 2;
 };

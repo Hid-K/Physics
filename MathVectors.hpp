@@ -24,6 +24,7 @@ class Vec2
     bool operator ==(Vec2 a);
     double length();
     double dest(Vec2 a);
+    double angle();
     Vec2 normalized();
 };
 
