@@ -15,7 +15,7 @@ size_t windowHeight = 512;
 
 char simulationRenderStatus = SIMULATION_RENDER_STATUS_PAUSED;
 
-void DrawCircle(SDL_Renderer * renderer, signed long long int radius, Vec2 pos, RGB color)
+void DrawCircle(SDL_Renderer * renderer, signed long long int radius, Vec2 pos, RGB & color)
 {
     SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, 255);
     for(int x=pos.x-radius; x<=pos.x+radius; x++)
@@ -68,11 +68,6 @@ void SDL_WINDOW_UPDATER(char * quit, PhysicsSimu * simulation, SDL_Renderer * ma
 
 int main()
 {
-
-    // for(double a = 0;a < M_PI*2; a += M_PI_4/2){
-    //     Vec2 adasda = {cos(a),sin(a)};
-    //     std::cout<<a*180/M_PI<<" : "<<adasda.angle() * 180 / M_PI<<std::endl<<std::endl;
-    // };
     if(SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
         std::cout<<"Cant create a main window"<<std::endl;
@@ -277,7 +272,8 @@ int main()
                 default:
                 break;
             break;
-        }
+        };
+        SDL_Delay(10);
     };
     SDL_Quit();
     return 0;

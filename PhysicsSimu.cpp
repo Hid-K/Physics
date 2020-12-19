@@ -115,9 +115,8 @@ PhysicsSimu::objectsCount()
 
 void circlesCollisionSpeedCalc(PhysicalCircle & obj, PhysicalCircle & currObj)
 {
-    Vec2 collisionNorm = (obj.pos - currObj.pos);
 
-    double touchAngle        =  collisionNorm.angle();
+    double touchAngle        =  (obj.pos - currObj.pos).angle();
     double currObjSpeedAngle =  currObj.speed.angle();
     double objSpeedAngle     =  obj.speed.angle();
 
@@ -128,16 +127,18 @@ void circlesCollisionSpeedCalc(PhysicalCircle & obj, PhysicalCircle & currObj)
                                  /
                                  (currObj.mass + obj.mass);
 
+    const double currObjSpeedLenRot = currObjSpeedLen * sin(currObjSpeedAngle - touchAngle);
+
     currObj.speed.x = speedModule
                     *
                     cos(touchAngle) +
-                    currObjSpeedLen * sin(currObjSpeedAngle - touchAngle) * cos(touchAngle + M_PI_2)
+                    currObjSpeedLenRot * cos(touchAngle + M_PI_2)
                     ;
 
     currObj.speed.y = speedModule
                     *
                     sin(touchAngle) +
-                    currObjSpeedLen * sin(currObjSpeedAngle - touchAngle) * sin(touchAngle + M_PI_2)
+                    currObjSpeedLenRot * sin(touchAngle + M_PI_2)
                     ;
 
     // currObj.speed /= 2;
