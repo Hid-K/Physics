@@ -1,5 +1,0 @@
-/Users/laptevaleksander/Documents/Projects/Physics/build/CMakeFiles/rebuild_cache.dir
-/Users/laptevaleksander/Documents/Projects/Physics/build/CMakeFiles/edit_cache.dir
-/Users/laptevaleksander/Documents/Projects/Physics/build/CMakeFiles/PhysicsSimu.dir
-/Users/laptevaleksander/Documents/Projects/Physics/build/CMakeFiles/PhysicsSimu_LIBRARY.dir
-/Users/laptevaleksander/Documents/Projects/Physics/build/CMakeFiles/MathVectors_LIBRARY.dir
