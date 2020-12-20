@@ -97,14 +97,13 @@ PhysicsSimu::getObject(size_t objectNo)
 PhysicalCircle *
 PhysicsSimu::getObject(Vec2 point)
 {
-    for(size_t i = 0; i < this->objectsCount(); ++i)
-    {
-        if(this->getObject(i)->pos.dest(point) - this->getObject(i)->radius < 0)
-        {
-            return this->getObject(i);
-        };
-    };
-    return nullptr;
+    for (auto &i : *objestsList)
+	{
+		if (i.pos.dest(point) - i.radius < 0)
+		    return &i;
+	}
+	
+	return nullptr;
 };
 
 size_t
